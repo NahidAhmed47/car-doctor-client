@@ -20,6 +20,9 @@ const Services = () => {
                     services.map(service => <ServiceCard key={service._id} service={service}></ServiceCard>)
                 }
             </div>
+            <div className='w-full text-center mt-8'>
+                <button class="btn btn-outline btn-secondary ">More Services</button>
+            </div>
         </div>
     );
 };
