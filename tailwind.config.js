@@ -23,7 +23,7 @@ export default {
 
           "success": "#35E9C8",
 
-          "warning": "#EF9943",
+          "warning": "#FF3811",
 
           "error": "#E25A75",
         },
