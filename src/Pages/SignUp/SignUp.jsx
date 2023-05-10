@@ -1,18 +1,19 @@
-import React from "react";
-import Header from "../Shared/Header/Header";
-import loginImg from '../../assets/images/login/login.svg'
+import React from 'react';
+import Header from '../Shared/Header/Header';
 import {Link} from 'react-router-dom'
+import loginImg from '../../assets/images/login/login.svg'
 
-const Login = () => {
+const SignUp = () => {
     const handleFormData = (e)=>{
         e.preventDefault();
         const form = e.target;
+        const name = form.name.value;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password);
+        console.log(name, email, password);
     }
-  return (
-    <div>
+    return (
+        <div>
       <Header></Header>
       <div className="hero min-h-[80vh]">
         <div className="hero-content flex flex-col md:flex-row gap-20">
@@ -21,6 +22,17 @@ const Login = () => {
           </div>
           <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
             <form className="card-body" onSubmit={handleFormData}>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Name</span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="Name"
+                  className="input input-bordered"
+                  name="name"
+                />
+              </div>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
@@ -42,22 +54,17 @@ const Login = () => {
                   className="input input-bordered"
                   name="password"
                 />
-                <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">
-                    Forgot password?
-                  </a>
-                </label>
               </div>
               <div className="form-control mt-6">
-                <button className="btn btn-primary">Login</button>
+                <button className="btn btn-primary">Sign up</button>
               </div>
-              <p className="text-center mt-3">Don't have an account? Please <Link className="text-secondary hover:underline" to='/sign-up'>Sign up</Link> </p>
+              <p className="text-center mt-3">Already have an account? Please <Link className="text-secondary hover:underline" to='/login'>Log in</Link> </p>
             </form>
           </div>
         </div>
       </div>
     </div>
-  );
+    );
 };
 
-export default Login;
+export default SignUp;
