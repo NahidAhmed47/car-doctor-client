@@ -1,16 +1,33 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import Header from '../Shared/Header/Header';
 import {Link} from 'react-router-dom'
 import loginImg from '../../assets/images/login/login.svg'
+import { AuthContext } from '../../Providers/AuthProviders';
+import Swal from 'sweetalert2';
 
 const SignUp = () => {
+    const {createUser} = useContext(AuthContext);
+    const [error, setError] = useState('');
     const handleFormData = (e)=>{
         e.preventDefault();
+        setError('')
         const form = e.target;
         const name = form.name.value;
         const email = form.email.value;
         const password = form.password.value;
         console.log(name, email, password);
+        createUser(email, password)
+        .then(result => {
+            Swal.fire({
+                title: 'Success!',
+                text: 'Successfully signed up',
+                icon: 'success'
+              })
+              form.reset();
+        })
+        .catch(error => {
+            setError(error.message);
+        })
     }
     return (
         <div>
@@ -21,6 +38,7 @@ const SignUp = () => {
             <img src={loginImg} alt="" />
           </div>
           <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+            <p className='text-secondary text-sm pt-2 text-center'>{error}</p>
             <form className="card-body" onSubmit={handleFormData}>
               <div className="form-control">
                 <label className="label">
