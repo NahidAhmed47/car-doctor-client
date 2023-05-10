@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import Header from '../Shared/Header/Header';
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import loginImg from '../../assets/images/login/login.svg'
 import { AuthContext } from '../../Providers/AuthProviders';
 import Swal from 'sweetalert2';
@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 const SignUp = () => {
     const {createUser} = useContext(AuthContext);
     const [error, setError] = useState('');
+    const navigate = useNavigate();
     const handleFormData = (e)=>{
         e.preventDefault();
         setError('')
@@ -24,6 +25,7 @@ const SignUp = () => {
                 icon: 'success'
               })
               form.reset();
+              navigate('/', {replace: true});
         })
         .catch(error => {
             setError(error.message);

@@ -1,15 +1,32 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import Header from "../Shared/Header/Header";
 import loginImg from '../../assets/images/login/login.svg'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
+import { AuthContext } from "../../Providers/AuthProviders";
+import Swal from "sweetalert2";
 
 const Login = () => {
+    const {signIn} = useContext(AuthContext);
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
     const handleFormData = (e)=>{
         e.preventDefault();
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password);
+        signIn(email, password)
+        .then(result => {
+            Swal.fire({
+                title: 'Success!',
+                text: 'Successfully signed in',
+                icon: 'success'
+              })
+              form.reset();
+              navigate('/', {replace: true});
+        })
+        .catch(error => {
+            setError(error.message);
+        })
     }
   return (
     <div>
@@ -20,6 +37,7 @@ const Login = () => {
             <img src={loginImg} alt="" />
           </div>
           <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+          <p className='text-secondary text-sm pt-2 text-center'>{error}</p>
             <form className="card-body" onSubmit={handleFormData}>
               <div className="form-control">
                 <label className="label">
