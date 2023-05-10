@@ -10,7 +10,7 @@ const Header = () => {
                 <NavLink to='/about'>About</NavLink>
             </div>
             <div>
-            <button className="btn btn-outline btn-secondary">Button</button>
+            <button className="btn btn-outline btn-secondary">Appointment</button>
             </div>
         </div>
     );
