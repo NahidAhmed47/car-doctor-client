@@ -21,7 +21,7 @@ const Services = () => {
                 }
             </div>
             <div className='w-full text-center mt-8'>
-                <button class="btn btn-outline btn-secondary ">More Services</button>
+                <button className="btn btn-outline btn-secondary ">More Services</button>
             </div>
         </div>
     );
