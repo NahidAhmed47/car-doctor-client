@@ -21,7 +21,10 @@ const Header = () => {
                 <NavLink to='/about'>About</NavLink>
                 {
                     user? (
+                        <>
+                        <NavLink to='/all-bookings'>All Bookings</NavLink>
                         <NavLink to='/' onClick={handleLogOut}>Logout</NavLink>
+                        </>
                     ) : (
                         <NavLink to='/login'>Login</NavLink>
                     )
