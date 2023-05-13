@@ -18,13 +18,26 @@ const Login = () => {
         const password = form.password.value;
         signIn(email, password)
         .then(result => {
+          fetch('http://localhost:5000/jwt', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              email: result.user.email
+            })
+          })
+          .then(res => res.json())
+          .then(data => {
+            localStorage.setItem('token', data.token);
             Swal.fire({
-                title: 'Success!',
-                text: 'Successfully signed in',
-                icon: 'success'
-              })
-              form.reset();
-              navigate(from, {replace: true});
+              title: 'Success!',
+              text: 'Successfully signed in',
+              icon: 'success'
+            })
+            form.reset();
+            navigate(from, {replace: true});
+            })
         })
         .catch(error => {
             setError(error.message);
