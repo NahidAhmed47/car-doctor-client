@@ -5,12 +5,26 @@ import Swal from "sweetalert2";
 const BookingDetails = () => {
   const { user } = useContext(AuthContext);
   const [bookings, setBookings] = useState([]);
-  const url = `http://localhost:5000/all-bookings?email=${user.email}`;
+  const url = `http://localhost:5000/all-bookings?email=${user?.email}`;
   useEffect(() => {
-    fetch(url)
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    })
       .then((res) => res.json())
       .then((data) => {
-        setBookings(data);
+        if(!data.error){
+          setBookings(data);
+        }
+        else{
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: data.error,
+          })
+        }
       })
       .catch((err) => console.log(err));
   }, []);

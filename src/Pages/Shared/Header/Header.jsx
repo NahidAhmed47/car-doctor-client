@@ -7,7 +7,7 @@ const Header = () => {
     const handleLogOut = ()=>{
         LogOut()
         .then(()=>{
-
+            localStorage.removeItem('token')
         })
         .catch(error =>{
             console.log(error.message);
